@@ -8,7 +8,6 @@ RUN groupadd -r jasmin && useradd -r -g jasmin jasmin
 ENV JASMIN_VERSION 0.9.31
 
 COPY jasmin-0.9.31.tar.gz /tmp/
-RUN tar -zxvf /tmp/jasmin-0.9.31.tar.gz -C /tmp
 
 # Install requirements
 RUN apt-get update && apt-get install -y \
@@ -29,7 +28,7 @@ RUN mkdir -p /etc/jasmin/resource \
     /var/log/jasmin \
   && chown jasmin:jasmin /etc/jasmin/store \
     /var/log/jasmin \
-  && pip install --pre jasmin=="$JASMIN_VERSION"
+  && pip install ./tmp/jasmin-0.9.31.tar.gz
 
 # Change binding host for jcli
 RUN sed -i '/\[jcli\]/a bind=0.0.0.0' /etc/jasmin/jasmin.cfg

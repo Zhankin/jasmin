@@ -7,6 +7,9 @@ RUN groupadd -r jasmin && useradd -r -g jasmin jasmin
 
 ENV JASMIN_VERSION 0.9.31
 
+COPY jasmin-0.9.31.tar.gz /tmp/
+RUN tar -zxvf /tmp/jasmin-0.9.31.tar.gz -C /tmp
+
 # Install requirements
 RUN apt-get update && apt-get install -y \
     python2.7 \
